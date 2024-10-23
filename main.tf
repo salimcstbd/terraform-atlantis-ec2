@@ -1,16 +1,15 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
-}
-
 provider "aws" {
   region  = "us-east-1"
+}
+
+############ SAVING TF STATE FILE #########
+terraform {
+  backend "s3" {
+    bucket  = "terraform-bd-atlantis"
+    key     = "atlantis/terraform.tfstate"
+    region  = "us-east-1"
+    profile = "default"
+  }
 }
 
 resource "aws_vpc" "myvpc" {
@@ -33,7 +32,7 @@ resource "aws_subnet" "mypublic_subnet" {
 
 resource "aws_instance" "app_server" {
   ami           = "ami-0866a3c8686eaeeba"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   subnet_id     = aws_subnet.mypublic_subnet.id
 
   tags = {
