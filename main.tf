@@ -32,7 +32,7 @@ resource "aws_subnet" "mypublic_subnet" {
 
 resource "aws_instance" "app_server" {
   ami           = "ami-0866a3c8686eaeeba"
-  instance_type = "t2.small"
+  instance_type = "t2.micro"
   subnet_id     = aws_subnet.mypublic_subnet.id
 
   tags = {
