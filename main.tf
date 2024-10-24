@@ -1,6 +1,7 @@
 provider "aws" {
-  region  = "us-east-1"
-  profile = "default"
+  region    = "us-east-1"
+  profile   = "default"
+ 
 }
 
 ############ SAVING TF STATE FILE #########
@@ -9,7 +10,8 @@ terraform {
     bucket  = "terraform-bd-atlantis"
     key     = "atlantis/terraform.tfstate"
     region  = "us-east-1"
-    profile = "default"
+    profile   = "default"
+   
   }
 }
 
@@ -33,7 +35,7 @@ resource "aws_subnet" "mypublic_subnet" {
 
 resource "aws_instance" "app_server" {
   ami           = "ami-0866a3c8686eaeeba"
-  instance_type = "t2.small"
+  instance_type = "t2.micro"
   subnet_id     = aws_subnet.mypublic_subnet.id
 
   tags = {
