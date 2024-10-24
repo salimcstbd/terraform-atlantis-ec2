@@ -1,5 +1,6 @@
 provider "aws" {
   region    = "us-east-1"
+  profile   = "default"
  
 }
 
@@ -9,6 +10,7 @@ terraform {
     bucket  = "terraform-bd-atlantis"
     key     = "atlantis/terraform.tfstate"
     region  = "us-east-1"
+    profile   = "default"
    
   }
 }
